@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,128 +18,160 @@
       padding: 2rem;
       text-align: center;
       overflow: hidden;
-    }.heading {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  line-height: 1.4;
-  width: 100%;
-  background: linear-gradient(90deg, #facc15, #00f0ff, #facc15);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 3s linear infinite;
-}
+    }
 
-@keyframes shine {
-  0% { background-position: 0% center; }
-  100% { background-position: -200% center; }
-}
+    .heading {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+      width: 100%;
+      background: linear-gradient(90deg, #facc15, #00f0ff, #facc15);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 3s linear infinite;
+    }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
-  width: 100%;
-  max-width: 600px;
-}
+    @keyframes shine {
+      0% { background-position: 0% center; }
+      100% { background-position: -200% center; }
+    }
 
-a {
-  display: block;
-  background-color: #1e1e1e;
-  padding: 0.75rem 1rem;
-  text-align: center;
-  border-radius: 100px;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease, background-color 0.3s;
-  -webkit-tap-highlight-color: transparent;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      width: 100%;
+      max-width: 600px;
+    }
 
-a span.label {
-  display: inline-block;
-  background: linear-gradient(90deg, #facc15, #00f0ff, #facc15);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 3s linear infinite;
-}
+    a {
+      display: block;
+      background-color: #1e1e1e;
+      padding: 0.75rem 1rem;
+      text-align: center;
+      border-radius: 100px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, background-color 0.3s;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-a:active {
-  background-color: #2c2c2c;
-  transform: scale(0.95);
-}
+    a span.label {
+      display: inline-block;
+      background: linear-gradient(90deg, #facc15, #00f0ff, #facc15);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 3s linear infinite;
+    }
 
-.movies-row {
-  grid-column: span 2;
-  background-color: #1e1e1e;
-  border-radius: 100px;
-  overflow: hidden;
-  display: flex;
-}
+    a span.ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      background-color: rgba(0, 240, 255, 0.3);
+      pointer-events: none;
+    }
 
-.movies-row a {
-  flex: 1;
-  border-radius: 0;
-  background: transparent;
-}
+    @keyframes ripple {
+      to { transform: scale(4); opacity: 0; }
+    }
 
-.movies-row a:first-child {
-  border-right: 1px solid #333;
-}
+    a:active {
+      background-color: #2c2c2c;
+      transform: scale(0.95);
+    }
 
-.particle {
-  position: fixed;
-  top: -10px;
-  font-size: 20px;
-  animation: fall 10s linear infinite;
-  opacity: 0.5;
-  pointer-events: none;
-}
+    .movies-row {
+      grid-column: span 2;
+      background-color: #1e1e1e;
+      border-radius: 100px;
+      overflow: hidden;
+      display: flex;
+    }
 
-@keyframes fall {
-  to {
-    transform: translateY(120vh) rotate(360deg);
-    opacity: 0;
-  }
-}
+    .movies-row a {
+      flex: 1;
+      border-radius: 0;
+      background: transparent;
+    }
 
+    .movies-row a:first-child {
+      border-right: 1px solid #333;
+    }
+
+    /* Floating heart particles */
+    .particle {
+      position: fixed;
+      top: -30px;
+      font-size: 18px;
+      opacity: 0.6;
+      animation: float 10s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); }
+      100% { transform: translateY(110vh) translateX(-20px); opacity: 0; }
+    }
   </style>
 </head>
 <body>
-  <h1 class="heading">DM All<br />Seasons & Movies</h1>
+  <h1 class="heading">
+    DM All<br />Seasons & Movies
+  </h1>
+
   <div class="grid">
-    <a href="https://archive.org/details/dm-s1-mak"><span class="label">DM_S1</span></a>
-    <a href="https://archive.org/details/doraemon-s2-mak"><span class="label">DM_S2</span></a>
-    <a href="https://archive.org/details/DM-S3-MAK"><span class="label">DM_S3</span></a>
-    <a href="https://archive.org/details/DM-S4-MAK"><span class="label">DM_S4</span></a>
-    <a href="https://archive.org/details/DM-S5-MAK"><span class="label">DM_S5</span></a>
-    <a href="https://archive.org/details/DM-S6-MAK2"><span class="label">DM_S6</span></a>
-    <a href="https://archive.org/details/DM-S7-MAK"><span class="label">DM_S7</span></a>
-    <a href="https://archive.org/details/DM-S8-MAK"><span class="label">DM_S8</span></a>
-    <a href="https://archive.org/details/DM-S12-MAK"><span class="label">DM_S12</span></a>
-    <a href="https://archive.org/details/DM_S14_MAK"><span class="label">DM_S14</span></a>
-    <a href="https://archive.org/details/DM_S15_MAK"><span class="label">DM_S15</span></a>
-    <a href="https://archive.org/details/DM_S16_MAK"><span class="label">DM_S16</span></a>
-    <a href="https://archive.org/details/DM_S17_MAK"><span class="label">DM_S17</span></a>
-    <a href="https://archive.org/details/DM_S18_MAK"><span class="label">DM_S18</span></a>
-    <a href="https://archive.org/details/DM_S19_MAK"><span class="label">DM_S19</span></a>
-    <a href="https://archive.org/details/DM_S20_MAK"><span class="label">DM_S20</span></a>
+    <a href="https://archive.org/details/dm-s1-mak" onclick="ripple(event)"><span class="label">DM_S1</span></a>
+    <a href="https://archive.org/details/doraemon-s2-mak" onclick="ripple(event)"><span class="label">DM_S2</span></a>
+    <a href="https://archive.org/details/DM-S3-MAK" onclick="ripple(event)"><span class="label">DM_S3</span></a>
+    <a href="https://archive.org/details/DM-S4-MAK" onclick="ripple(event)"><span class="label">DM_S4</span></a>
+    <a href="https://archive.org/details/DM-S5-MAK" onclick="ripple(event)"><span class="label">DM_S5</span></a>
+    <a href="https://archive.org/details/DM-S6-MAK2" onclick="ripple(event)"><span class="label">DM_S6</span></a>
+    <a href="https://archive.org/details/DM-S7-MAK" onclick="ripple(event)"><span class="label">DM_S7</span></a>
+    <a href="https://archive.org/details/DM-S8-MAK" onclick="ripple(event)"><span class="label">DM_S8</span></a>
+    <a href="https://archive.org/details/DM-S12-MAK" onclick="ripple(event)"><span class="label">DM_S12</span></a>
+    <a href="https://archive.org/details/DM_S14_MAK" onclick="ripple(event)"><span class="label">DM_S14</span></a>
+    <a href="https://archive.org/details/DM_S15_MAK" onclick="ripple(event)"><span class="label">DM_S15</span></a>
+    <a href="https://archive.org/details/DM_S16_MAK" onclick="ripple(event)"><span class="label">DM_S16</span></a>
+    <a href="https://archive.org/details/DM_S17_MAK" onclick="ripple(event)"><span class="label">DM_S17</span></a>
+    <a href="https://archive.org/details/DM_S18_MAK" onclick="ripple(event)"><span class="label">DM_S18</span></a>
+    <a href="https://archive.org/details/DM_S19_MAK" onclick="ripple(event)"><span class="label">DM_S19</span></a>
+    <a href="https://archive.org/details/DM_S20_MAK" onclick="ripple(event)"><span class="label">DM_S20</span></a>
+
     <div class="movies-row">
-      <a href="https://archive.org/details/DM_MOVIES_MAK"><span class="label">MOVIES-1</span></a>
-      <a href="https://archive.org/details/DM_MOVIES_PT2_MAK"><span class="label">MOVIES-2</span></a>
+      <a href="https://archive.org/details/DM_MOVIES_MAK" onclick="ripple(event)"><span class="label">MOVIES-1</span></a>
+      <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" onclick="ripple(event)"><span class="label">MOVIES-2</span></a>
     </div>
-  </div>  <script>
-    const particles = ["★", "♡", "●"];
+  </div>
+
+  <script>
+    function ripple(e) {
+      if (navigator.vibrate) navigator.vibrate(30);
+      const target = e.currentTarget;
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      ripple.style.width = ripple.style.height = Math.max(target.offsetWidth, target.offsetHeight) + 'px';
+      ripple.style.left = e.clientX - target.getBoundingClientRect().left - ripple.offsetWidth / 2 + 'px';
+      ripple.style.top = e.clientY - target.getBoundingClientRect().top - ripple.offsetHeight / 2 + 'px';
+      target.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    }
+
+    // Floating particles
+    const hearts = ['♡'];
     setInterval(() => {
-      const span = document.createElement("span");
-      span.className = "particle";
-      span.style.left = Math.random() * window.innerWidth + "px";
-      span.style.fontSize = (Math.random() * 15 + 10) + "px";
-      span.style.animationDuration = (6 + Math.random() * 6) + "s";
-      span.innerText = particles[Math.floor(Math.random() * particles.length)];
-      document.body.appendChild(span);
-      setTimeout(() => span.remove(), 10000);
-    }, 400);
-  </script></body>
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.fontSize = (14 + Math.random() * 10) + 'px';
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 10000);
+    }, 800);
+  </script>
+</body>
 </html>
