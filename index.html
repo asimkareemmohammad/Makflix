@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,58 +16,81 @@
       min-height: 100vh;
       padding: 2rem;
       text-align: center;
-    }
+    }.heading {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #facc15;
+  line-height: 1.4;
+  width: 100%;
+}
 
-    .heading {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      color: #facc15;
-      line-height: 1.4;
-      width: 100%;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem;
-      width: 100%;
-      max-width: 600px;
-    }
+.button {
+  position: relative;
+  display: block;
+  background-color: #1e1e1e;
+  color: #00f0ff;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.3s;
+  overflow: hidden;
+}
 
-    a {
-      display: block;
-      background-color: #1e1e1e;
-      color: #00f0ff;
-      padding: 0.75rem 1rem;
-      text-align: center;
-      border-radius: 100px;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease, background-color 0.3s;
-      -webkit-tap-highlight-color: transparent; /* <--- This is the fix */
-    }
+.button:active {
+  background-color: #2c2c2c;
+  transform: scale(0.95);
+}
 
-    a span.ripple {
-      position: absolute;
-      border-radius: 50%;
-      transform: scale(0);
-      animation: ripple 0.6s linear;
-      background-color: rgba(0, 240, 255, 0.3);
-      pointer-events: none;
-    }
+.heart {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #ff4d6d;
+  transform: rotate(45deg);
+  animation: floatUp 0.8s forwards;
+  opacity: 0;
+}
 
-    @keyframes ripple {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #ff4d6d;
+  border-radius: 50%;
+}
 
-    a:active {
-      background-color: #2c2c2c;
-      transform: scale(0.95);
-    }
+.heart::before {
+  top: -5px;
+  left: 0;
+}
+
+.heart::after {
+  left: -5px;
+  top: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30px) scale(1.2) rotate(45deg);
+    opacity: 0;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -76,39 +98,41 @@
     DM All<br />Seasons & Movies
   </h1>
   <div class="grid">
-    <a href="https://archive.org/details/dm-s1-mak" onclick="ripple(event)">DM_S1</a>
-    <a href="https://archive.org/details/doraemon-s2-mak" onclick="ripple(event)">DM_S2</a>
-    <a href="https://archive.org/details/DM-S3-MAK" onclick="ripple(event)">DM_S3</a>
-    <a href="https://archive.org/details/DM-S4-MAK" onclick="ripple(event)">DM_S4</a>
-    <a href="https://archive.org/details/DM-S5-MAK" onclick="ripple(event)">DM_S5</a>
-    <a href="https://archive.org/details/DM-S6-MAK2" onclick="ripple(event)">DM_S6</a>
-    <a href="https://archive.org/details/DM-S7-MAK" onclick="ripple(event)">DM_S7</a>
-    <a href="https://archive.org/details/DM-S8-MAK" onclick="ripple(event)">DM_S8</a>
-    <a href="https://archive.org/details/DM-S12-MAK" onclick="ripple(event)">DM_S12</a>
-    <a href="https://archive.org/details/DM_S14_MAK" onclick="ripple(event)">DM_S14</a>
-    <a href="https://archive.org/details/DM_S15_MAK" onclick="ripple(event)">DM_S15</a>
-    <a href="https://archive.org/details/DM_S16_MAK" onclick="ripple(event)">DM_S16</a>
-    <a href="https://archive.org/details/DM_S17_MAK" onclick="ripple(event)">DM_S17</a>
-    <a href="https://archive.org/details/DM_S18_MAK" onclick="ripple(event)">DM_S18</a>
-    <a href="https://archive.org/details/DM_S19_MAK" onclick="ripple(event)">DM_S19</a>
-    <a href="https://archive.org/details/DM_S20_MAK" onclick="ripple(event)">DM_S20</a>
-    <a href="#" onclick="ripple(event)">DM_S21</a>
-    <a href="https://archive.org/details/DM_MOVIES_MAK" onclick="ripple(event)">MOVIES-1</a>
-    <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" onclick="ripple(event)">MOVIES-2</a>
-  </div>
-
-  <script>
-    function ripple(e) {
+    <a href="https://archive.org/details/dm-s1-mak" class="button" onclick="vibe(this)">DM_S1</a>
+    <a href="https://archive.org/details/doraemon-s2-mak" class="button" onclick="vibe(this)">DM_S2</a>
+    <a href="https://archive.org/details/DM-S3-MAK" class="button" onclick="vibe(this)">DM_S3</a>
+    <a href="https://archive.org/details/DM-S4-MAK" class="button" onclick="vibe(this)">DM_S4</a>
+    <a href="https://archive.org/details/DM-S5-MAK" class="button" onclick="vibe(this)">DM_S5</a>
+    <a href="https://archive.org/details/DM-S6-MAK2" class="button" onclick="vibe(this)">DM_S6</a>
+    <a href="https://archive.org/details/DM-S7-MAK" class="button" onclick="vibe(this)">DM_S7</a>
+    <a href="https://archive.org/details/DM-S8-MAK" class="button" onclick="vibe(this)">DM_S8</a>
+    <a href="https://archive.org/details/DM-S12-MAK" class="button" onclick="vibe(this)">DM_S12</a>
+    <a href="https://archive.org/details/DM_S14_MAK" class="button" onclick="vibe(this)">DM_S14</a>
+    <a href="https://archive.org/details/DM_S15_MAK" class="button" onclick="vibe(this)">DM_S15</a>
+    <a href="https://archive.org/details/DM_S16_MAK" class="button" onclick="vibe(this)">DM_S16</a>
+    <a href="https://archive.org/details/DM_S17_MAK" class="button" onclick="vibe(this)">DM_S17</a>
+    <a href="https://archive.org/details/DM_S18_MAK" class="button" onclick="vibe(this)">DM_S18</a>
+    <a href="https://archive.org/details/DM_S19_MAK" class="button" onclick="vibe(this)">DM_S19</a>
+    <a href="https://archive.org/details/DM_S20_MAK" class="button" onclick="vibe(this)">DM_S20</a>
+    <a href="#" class="button" onclick="vibe(this)">DM_S21</a>
+    <a href="https://archive.org/details/DM_MOVIES_MAK" class="button" onclick="vibe(this)">MOVIES-1</a>
+    <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" class="button" onclick="vibe(this)">MOVIES-2</a>
+  </div>  <script>
+    function vibe(el) {
       if (navigator.vibrate) navigator.vibrate(30);
-      const target = e.currentTarget;
-      const ripple = document.createElement('span');
-      ripple.classList.add('ripple');
-      ripple.style.width = ripple.style.height = Math.max(target.offsetWidth, target.offsetHeight) + 'px';
-      ripple.style.left = e.clientX - target.getBoundingClientRect().left - ripple.offsetWidth / 2 + 'px';
-      ripple.style.top = e.clientY - target.getBoundingClientRect().top - ripple.offsetHeight / 2 + 'px';
-      target.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 600);
+
+      for (let i = 0; i < 4; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = Math.random() * 80 + 10 + 'px';
+        heart.style.bottom = '10px';
+        heart.style.animationDelay = `${i * 0.05}s`;
+        el.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 800);
+      }
     }
-  </script>
-</body>
+  </script></body>
 </html>
