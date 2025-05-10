@@ -84,23 +84,21 @@
     }
 
     .movies-row {
-      display: flex;
-      flex-direction: row;
-      gap: 1rem;
       grid-column: span 2;
-      width: 100%;
+      background-color: #1e1e1e;
+      border-radius: 100px;
+      overflow: hidden;
+      display: flex;
     }
 
     .movies-row a {
       flex: 1;
-      border-radius: 100px;
+      border-radius: 0;
+      background: transparent;
     }
 
-    @media (max-width: 600px) {
-      .movies-row {
-        flex-direction: column;
-        grid-column: auto;
-      }
+    .movies-row a:first-child {
+      border-right: 1px solid #333;
     }
   </style>
 </head>
