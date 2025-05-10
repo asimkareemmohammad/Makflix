@@ -103,31 +103,36 @@
       border-right: 1px solid #333;
     }
 
-    /* Floating heart particles */
+    /* Floating hearts */
     .particle {
       position: fixed;
       top: -30px;
       font-size: 18px;
       opacity: 0.7;
       pointer-events: none;
-      animation: float 10s linear infinite;
       background: linear-gradient(45deg, #ff6ec4, #ff9a9e);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: float 10s linear forwards;
     }
 
     @keyframes float {
-      0% { transform: translateY(0) translateX(0); }
-      100% { transform: translateY(110vh) translateX(-20px); opacity: 0; }
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <h1 class="heading">
-    DM All<br />Seasons & Movies
-  </h1>
+  <h1 class="heading">DM All<br />Seasons & Movies</h1>
 
   <div class="grid">
+    <!-- Seasons -->
     <a href="https://archive.org/details/dm-s1-mak" onclick="ripple(event)"><span class="label">DM_S1</span></a>
     <a href="https://archive.org/details/doraemon-s2-mak" onclick="ripple(event)"><span class="label">DM_S2</span></a>
     <a href="https://archive.org/details/DM-S3-MAK" onclick="ripple(event)"><span class="label">DM_S3</span></a>
@@ -145,6 +150,7 @@
     <a href="https://archive.org/details/DM_S19_MAK" onclick="ripple(event)"><span class="label">DM_S19</span></a>
     <a href="https://archive.org/details/DM_S20_MAK" onclick="ripple(event)"><span class="label">DM_S20</span></a>
 
+    <!-- Movies Row -->
     <div class="movies-row">
       <a href="https://archive.org/details/DM_MOVIES_MAK" onclick="ripple(event)"><span class="label">MOVIES-1</span></a>
       <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" onclick="ripple(event)"><span class="label">MOVIES-2</span></a>
@@ -164,7 +170,7 @@
       setTimeout(() => ripple.remove(), 600);
     }
 
-    // Floating hearts
+    // Hearts generator with rotation
     const hearts = ['♡'];
     setInterval(() => {
       const particle = document.createElement('div');
@@ -172,8 +178,10 @@
       particle.textContent = hearts[Math.floor(Math.random() * hearts.length)];
       particle.style.left = Math.random() * 100 + 'vw';
       particle.style.fontSize = (14 + Math.random() * 10) + 'px';
+      particle.style.animationDuration = (6 + Math.random() * 5) + 's';
+      particle.style.transform = `rotate(${Math.random() * 360}deg)`;
       document.body.appendChild(particle);
-      setTimeout(() => particle.remove(), 10000);
+      setTimeout(() => particle.remove(), 12000);
     }, 700);
   </script>
 </body>
