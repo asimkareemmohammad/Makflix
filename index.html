@@ -106,14 +106,17 @@
     .particle {
       position: fixed;
       top: 0;
-      color: #ff99cc;
-      opacity: 0.7;
+      opacity: 0.9;
       pointer-events: none;
       font-size: 18px;
-      animation: fall 10s linear forwards;
+      background: linear-gradient(90deg, #ff69b4, #ffb6c1, #ff69b4);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: float 10s linear forwards, shine 2s infinite linear;
     }
 
-    @keyframes fall {
+    @keyframes float {
       to {
         transform: translateY(110vh);
         opacity: 0;
@@ -165,9 +168,8 @@
       heart.textContent = '♡';
       heart.style.left = Math.random() * window.innerWidth + 'px';
 
-      const size = Math.floor(Math.random() * 40) + 20; // 20px to 60px
-      const duration = Math.random() * 6000 + 6000; // 6000ms to 12000ms
-
+      const size = Math.floor(Math.random() * 10) + 14; // 14px to 24px
+      const duration = Math.random() * 4000 + 8000;     // 8s to 12s
       heart.style.fontSize = size + 'px';
 
       const angle = Math.random() > 0.5 ? 1 : -1;
