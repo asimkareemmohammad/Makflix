@@ -16,7 +16,7 @@
       min-height: 100vh;
       padding: 2rem;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
     }.heading {
   font-size: 2rem;
   margin-bottom: 2rem;
@@ -30,8 +30,12 @@
 }
 
 @keyframes shine {
-  0% { background-position: 0% center; }
-  100% { background-position: -200% center; }
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
 }
 
 .grid {
@@ -40,6 +44,7 @@
   gap: 1rem;
   width: 100%;
   max-width: 600px;
+  z-index: 1;
 }
 
 a {
@@ -104,16 +109,11 @@ a:active {
 }
 
 .heart {
-  position: absolute;
-  font-size: 18px;
+  position: fixed;
+  font-size: 20px;
+  pointer-events: none;
   color: hotpink;
-  opacity: 0.8;
-  animation: fall 10s linear forwards;
-}
-
-@keyframes fall {
-  0% { top: -10%; opacity: 1; }
-  100% { top: 110%; opacity: 0; }
+  z-index: 0;
 }
 
   </style>
@@ -141,7 +141,8 @@ a:active {
       <a href="https://archive.org/details/DM_MOVIES_MAK" onclick="ripple(event)"><span class="label">MOVIES-1</span></a>
       <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" onclick="ripple(event)"><span class="label">MOVIES-2</span></a>
     </div>
-  </div>  <script>
+  </div>
+  <script>
     function ripple(e) {
       if (navigator.vibrate) navigator.vibrate(30);
       const target = e.currentTarget;
@@ -152,33 +153,43 @@ a:active {
       ripple.style.top = e.clientY - target.getBoundingClientRect().top - ripple.offsetHeight / 2 + 'px';
       target.appendChild(ripple);
       setTimeout(() => ripple.remove(), 600);
-    }
+    }let tiltX = 0, tiltY = 1;
 
-    const gravity = { x: 0, y: 2 };
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerText = '♡';
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      document.body.appendChild(heart);
-      let x = parseFloat(heart.style.left);
-      let y = -20;
-      const fall = () => {
-        x += gravity.x;
-        y += gravity.y;
-        heart.style.transform = `translate(${x}px, ${y}px)`;
-        if (y < window.innerHeight) requestAnimationFrame(fall);
-        else heart.remove();
-      };
-      fall();
-    }
-    setInterval(createHeart, 500);
+if (window.DeviceOrientationEvent) {
+  window.addEventListener('deviceorientation', (e) => {
+    tiltX = e.gamma / 5;
+    tiltY = e.beta / 5;
+  });
+}
 
-    if (window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', (e) => {
-        gravity.x = e.gamma / 10;
-        gravity.y = 2 + Math.abs(e.beta / 20);
-      });
+function spawnHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerText = '♡';
+  heart.style.left = Math.random() * window.innerWidth + 'px';
+  heart.style.top = '-20px';
+  document.body.appendChild(heart);
+
+  let x = parseFloat(heart.style.left);
+  let y = -20;
+
+  function animate() {
+    x += tiltX;
+    y += tiltY;
+    heart.style.left = x + 'px';
+    heart.style.top = y + 'px';
+
+    if (y < window.innerHeight) {
+      requestAnimationFrame(animate);
+    } else {
+      heart.remove();
     }
-  </script></body>
+  }
+  animate();
+}
+
+setInterval(spawnHeart, 400);
+
+  </script>
+</body>
 </html>
