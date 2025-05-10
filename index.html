@@ -109,6 +109,7 @@
       color: #ff99cc;
       opacity: 0.7;
       pointer-events: none;
+      font-size: 18px;
       animation: fall 10s linear forwards;
     }
 
@@ -163,20 +164,27 @@
       heart.className = 'particle';
       heart.textContent = '♡';
       heart.style.left = Math.random() * window.innerWidth + 'px';
-      const size = Math.floor(Math.random() * 40) + 20; // between 20px and 60px
+
+      const size = Math.floor(Math.random() * 40) + 20; // 20px to 60px
+      const duration = Math.random() * 6000 + 6000; // 6000ms to 12000ms
+
       heart.style.fontSize = size + 'px';
+
       const angle = Math.random() > 0.5 ? 1 : -1;
       const spin = angle * (Math.random() * 360 + 90);
+
       heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+
       heart.animate([
         { transform: `translate(0, 0) rotate(0deg)` },
         { transform: `translate(${angle * 20}px, 110vh) rotate(${spin}deg)`, opacity: 0 }
       ], {
-        duration: 10000,
+        duration: duration,
         iterations: 1
       });
+
       document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 10000);
+      setTimeout(() => heart.remove(), duration);
     }, 600);
   </script>
 </body>
