@@ -106,14 +106,21 @@
     .particle {
       position: fixed;
       top: 0;
-      opacity: 0.9;
       pointer-events: none;
       font-size: 18px;
+      opacity: 0.9;
+      animation: float 10s linear forwards, shine 2s infinite linear;
+    }
+
+    .heart {
       background: linear-gradient(90deg, #ff69b4, #ffb6c1, #ff69b4);
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: float 10s linear forwards, shine 2s infinite linear;
+    }
+
+    .star {
+      color: white;
     }
 
     @keyframes float {
@@ -162,23 +169,27 @@
       setTimeout(() => ripple.remove(), 600);
     }
 
-    const icons = ['♡', '✧'];
+    const symbols = [
+      { char: '♡', class: 'heart' },
+      { char: '✧', class: 'star' }
+    ];
 
     setInterval(() => {
-      const drop = document.createElement('div');
-      drop.className = 'particle';
-      drop.textContent = icons[Math.floor(Math.random() * icons.length)];
-      drop.style.left = Math.random() * window.innerWidth + 'px';
+      const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+      const particle = document.createElement('div');
+      particle.className = `particle ${symbol.class}`;
+      particle.textContent = symbol.char;
+      particle.style.left = Math.random() * window.innerWidth + 'px';
 
       const size = Math.floor(Math.random() * 10) + 14;
       const duration = Math.random() * 4000 + 8000;
-      drop.style.fontSize = size + 'px';
+      particle.style.fontSize = size + 'px';
 
       const angle = Math.random() > 0.5 ? 1 : -1;
       const spin = angle * (Math.random() * 360 + 90);
-      drop.style.transform = `rotate(${Math.random() * 360}deg)`;
+      particle.style.transform = `rotate(${Math.random() * 360}deg)`;
 
-      drop.animate([
+      particle.animate([
         { transform: `translate(0, 0) rotate(0deg)` },
         { transform: `translate(${angle * 20}px, 110vh) rotate(${spin}deg)`, opacity: 0 }
       ], {
@@ -186,8 +197,8 @@
         iterations: 1
       });
 
-      document.body.appendChild(drop);
-      setTimeout(() => drop.remove(), duration);
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), duration);
     }, 300);
   </script>
 </body>
