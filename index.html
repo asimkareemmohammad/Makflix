@@ -46,6 +46,7 @@
       position: relative;
       overflow: hidden;
       transition: transform 0.2s ease, background-color 0.3s;
+      -webkit-tap-highlight-color: transparent; /* <--- This is the fix */
     }
 
     a span.ripple {
@@ -99,19 +100,14 @@
   <script>
     function ripple(e) {
       if (navigator.vibrate) navigator.vibrate(30);
-
       const target = e.currentTarget;
-      const circle = document.createElement('span');
-      circle.classList.add('ripple');
-      circle.style.width = circle.style.height = Math.max(target.offsetWidth, target.offsetHeight) + 'px';
-      circle.style.left = e.clientX - target.getBoundingClientRect().left - (circle.offsetWidth / 2) + 'px';
-      circle.style.top = e.clientY - target.getBoundingClientRect().top - (circle.offsetHeight / 2) + 'px';
-
-      target.appendChild(circle);
-
-      setTimeout(() => {
-        circle.remove();
-      }, 600);
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      ripple.style.width = ripple.style.height = Math.max(target.offsetWidth, target.offsetHeight) + 'px';
+      ripple.style.left = e.clientX - target.getBoundingClientRect().left - ripple.offsetWidth / 2 + 'px';
+      ripple.style.top = e.clientY - target.getBoundingClientRect().top - ripple.offsetHeight / 2 + 'px';
+      target.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
     }
   </script>
 </body>
