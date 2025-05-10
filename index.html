@@ -108,9 +108,12 @@
       position: fixed;
       top: -30px;
       font-size: 18px;
-      opacity: 0.6;
-      animation: float 10s linear infinite;
+      opacity: 0.7;
       pointer-events: none;
+      animation: float 10s linear infinite;
+      background: linear-gradient(45deg, #ff6ec4, #ff9a9e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     @keyframes float {
@@ -161,7 +164,7 @@
       setTimeout(() => ripple.remove(), 600);
     }
 
-    // Floating particles
+    // Floating hearts
     const hearts = ['♡'];
     setInterval(() => {
       const particle = document.createElement('div');
@@ -171,7 +174,7 @@
       particle.style.fontSize = (14 + Math.random() * 10) + 'px';
       document.body.appendChild(particle);
       setTimeout(() => particle.remove(), 10000);
-    }, 800);
+    }, 700);
   </script>
 </body>
 </html>
