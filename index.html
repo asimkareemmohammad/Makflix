@@ -43,31 +43,12 @@
       text-align: center;
       border-radius: 8px;
       text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      transition: background-color 0.3s ease;
-    }
-
-    a::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(0, 240, 255, 0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.4s ease, height 0.4s ease;
-    }
-
-    a:active::after {
-      width: 200%;
-      height: 200%;
+      transition: transform 0.2s ease, background-color 0.3s;
     }
 
     a:active {
       background-color: #2c2c2c;
+      transform: scale(0.95);
     }
   </style>
 </head>
@@ -76,25 +57,33 @@
     DM All<br />Seasons & Movies
   </h1>
   <div class="grid">
-    <a href="https://archive.org/details/dm-s1-mak">DM_S1</a>
-    <a href="https://archive.org/details/doraemon-s2-mak">DM_S2</a>
-    <a href="https://archive.org/details/DM-S3-MAK">DM_S3</a>
-    <a href="https://archive.org/details/DM-S4-MAK">DM_S4</a>
-    <a href="https://archive.org/details/DM-S5-MAK">DM_S5</a>
-    <a href="https://archive.org/details/DM-S6-MAK2">DM_S6</a>
-    <a href="https://archive.org/details/DM-S7-MAK">DM_S7</a>
-    <a href="https://archive.org/details/DM-S8-MAK">DM_S8</a>
-    <a href="https://archive.org/details/DM-S12-MAK">DM_S12</a>
-    <a href="https://archive.org/details/DM_S14_MAK">DM_S14</a>
-    <a href="https://archive.org/details/DM_S15_MAK">DM_S15</a>
-    <a href="https://archive.org/details/DM_S16_MAK">DM_S16</a>
-    <a href="https://archive.org/details/DM_S17_MAK">DM_S17</a>
-    <a href="https://archive.org/details/DM_S18_MAK">DM_S18</a>
-    <a href="https://archive.org/details/DM_S19_MAK">DM_S19</a>
-    <a href="https://archive.org/details/DM_S20_MAK">DM_S20</a>
-    <a href="#">DM_S21</a>
-    <a href="https://archive.org/details/DM_MOVIES_MAK">MOVIES-1</a>
-    <a href="https://archive.org/details/DM_MOVIES_PT2_MAK">MOVIES-2</a>
+    <a href="https://archive.org/details/dm-s1-mak" onclick="vibe()">DM_S1</a>
+    <a href="https://archive.org/details/doraemon-s2-mak" onclick="vibe()">DM_S2</a>
+    <a href="https://archive.org/details/DM-S3-MAK" onclick="vibe()">DM_S3</a>
+    <a href="https://archive.org/details/DM-S4-MAK" onclick="vibe()">DM_S4</a>
+    <a href="https://archive.org/details/DM-S5-MAK" onclick="vibe()">DM_S5</a>
+    <a href="https://archive.org/details/DM-S6-MAK2" onclick="vibe()">DM_S6</a>
+    <a href="https://archive.org/details/DM-S7-MAK" onclick="vibe()">DM_S7</a>
+    <a href="https://archive.org/details/DM-S8-MAK" onclick="vibe()">DM_S8</a>
+    <a href="https://archive.org/details/DM-S12-MAK" onclick="vibe()">DM_S12</a>
+    <a href="https://archive.org/details/DM_S14_MAK" onclick="vibe()">DM_S14</a>
+    <a href="https://archive.org/details/DM_S15_MAK" onclick="vibe()">DM_S15</a>
+    <a href="https://archive.org/details/DM_S16_MAK" onclick="vibe()">DM_S16</a>
+    <a href="https://archive.org/details/DM_S17_MAK" onclick="vibe()">DM_S17</a>
+    <a href="https://archive.org/details/DM_S18_MAK" onclick="vibe()">DM_S18</a>
+    <a href="https://archive.org/details/DM_S19_MAK" onclick="vibe()">DM_S19</a>
+    <a href="https://archive.org/details/DM_S20_MAK" onclick="vibe()">DM_S20</a>
+    <a href="#" onclick="vibe()">DM_S21</a>
+    <a href="https://archive.org/details/DM_MOVIES_MAK" onclick="vibe()">MOVIES-1</a>
+    <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" onclick="vibe()">MOVIES-2</a>
   </div>
+
+  <script>
+    function vibe() {
+      if (navigator.vibrate) {
+        navigator.vibrate(30);
+      }
+    }
+  </script>
 </body>
 </html>
