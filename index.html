@@ -51,7 +51,6 @@
     a {
       display: block;
       background-color: #1e1e1e;
-      color: #00f0ff;
       padding: 0.75rem 1rem;
       text-align: center;
       border-radius: 100px;
@@ -60,6 +59,15 @@
       overflow: hidden;
       transition: transform 0.2s ease, background-color 0.3s;
       -webkit-tap-highlight-color: transparent;
+    }
+
+    a span.label {
+      display: inline-block;
+      background: linear-gradient(90deg, #facc15, #00f0ff, #facc15);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 3s linear infinite;
     }
 
     a span.ripple {
@@ -107,26 +115,26 @@
     DM All<br />Seasons & Movies
   </h1>
   <div class="grid">
-    <a href="https://archive.org/details/dm-s1-mak" onclick="ripple(event)">DM_S1</a>
-    <a href="https://archive.org/details/doraemon-s2-mak" onclick="ripple(event)">DM_S2</a>
-    <a href="https://archive.org/details/DM-S3-MAK" onclick="ripple(event)">DM_S3</a>
-    <a href="https://archive.org/details/DM-S4-MAK" onclick="ripple(event)">DM_S4</a>
-    <a href="https://archive.org/details/DM-S5-MAK" onclick="ripple(event)">DM_S5</a>
-    <a href="https://archive.org/details/DM-S6-MAK2" onclick="ripple(event)">DM_S6</a>
-    <a href="https://archive.org/details/DM-S7-MAK" onclick="ripple(event)">DM_S7</a>
-    <a href="https://archive.org/details/DM-S8-MAK" onclick="ripple(event)">DM_S8</a>
-    <a href="https://archive.org/details/DM-S12-MAK" onclick="ripple(event)">DM_S12</a>
-    <a href="https://archive.org/details/DM_S14_MAK" onclick="ripple(event)">DM_S14</a>
-    <a href="https://archive.org/details/DM_S15_MAK" onclick="ripple(event)">DM_S15</a>
-    <a href="https://archive.org/details/DM_S16_MAK" onclick="ripple(event)">DM_S16</a>
-    <a href="https://archive.org/details/DM_S17_MAK" onclick="ripple(event)">DM_S17</a>
-    <a href="https://archive.org/details/DM_S18_MAK" onclick="ripple(event)">DM_S18</a>
-    <a href="https://archive.org/details/DM_S19_MAK" onclick="ripple(event)">DM_S19</a>
-    <a href="https://archive.org/details/DM_S20_MAK" onclick="ripple(event)">DM_S20</a>
+    <a href="https://archive.org/details/dm-s1-mak" onclick="ripple(event)"><span class="label">DM_S1</span></a>
+    <a href="https://archive.org/details/doraemon-s2-mak" onclick="ripple(event)"><span class="label">DM_S2</span></a>
+    <a href="https://archive.org/details/DM-S3-MAK" onclick="ripple(event)"><span class="label">DM_S3</span></a>
+    <a href="https://archive.org/details/DM-S4-MAK" onclick="ripple(event)"><span class="label">DM_S4</span></a>
+    <a href="https://archive.org/details/DM-S5-MAK" onclick="ripple(event)"><span class="label">DM_S5</span></a>
+    <a href="https://archive.org/details/DM-S6-MAK2" onclick="ripple(event)"><span class="label">DM_S6</span></a>
+    <a href="https://archive.org/details/DM-S7-MAK" onclick="ripple(event)"><span class="label">DM_S7</span></a>
+    <a href="https://archive.org/details/DM-S8-MAK" onclick="ripple(event)"><span class="label">DM_S8</span></a>
+    <a href="https://archive.org/details/DM-S12-MAK" onclick="ripple(event)"><span class="label">DM_S12</span></a>
+    <a href="https://archive.org/details/DM_S14_MAK" onclick="ripple(event)"><span class="label">DM_S14</span></a>
+    <a href="https://archive.org/details/DM_S15_MAK" onclick="ripple(event)"><span class="label">DM_S15</span></a>
+    <a href="https://archive.org/details/DM_S16_MAK" onclick="ripple(event)"><span class="label">DM_S16</span></a>
+    <a href="https://archive.org/details/DM_S17_MAK" onclick="ripple(event)"><span class="label">DM_S17</span></a>
+    <a href="https://archive.org/details/DM_S18_MAK" onclick="ripple(event)"><span class="label">DM_S18</span></a>
+    <a href="https://archive.org/details/DM_S19_MAK" onclick="ripple(event)"><span class="label">DM_S19</span></a>
+    <a href="https://archive.org/details/DM_S20_MAK" onclick="ripple(event)"><span class="label">DM_S20</span></a>
 
     <div class="movies-row">
-      <a href="https://archive.org/details/DM_MOVIES_MAK" onclick="ripple(event)">MOVIES-1</a>
-      <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" onclick="ripple(event)">MOVIES-2</a>
+      <a href="https://archive.org/details/DM_MOVIES_MAK" onclick="ripple(event)"><span class="label">MOVIES-1</span></a>
+      <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" onclick="ripple(event)"><span class="label">MOVIES-2</span></a>
     </div>
   </div>
 
