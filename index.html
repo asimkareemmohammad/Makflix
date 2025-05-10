@@ -61,6 +61,15 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    a span.label {
+      display: inline-block;
+      background: linear-gradient(90deg, #facc15, #00f0ff, #facc15);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 3s linear infinite;
+    }
+
     a span.ripple {
       position: absolute;
       border-radius: 50%;
@@ -81,16 +90,6 @@
       background-color: #2c2c2c;
       transform: scale(0.95);
     }
-
-    /* Gradient text inside buttons */
-    a span.label {
-    background: linear-gradient(90deg, #00f0ff, #a3e635, #00f0ff);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
-    }
-    
 
     .movies-row {
       grid-column: span 2;
