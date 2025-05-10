@@ -24,7 +24,7 @@
       margin-bottom: 2rem;
       line-height: 1.4;
       width: 100%;
-      background: linear-gradient(90deg, #facc15, #00f0ff, #facc15);
+      background: linear-gradient(90deg, #facc15, #00f0ff, #00ff99);
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -32,8 +32,12 @@
     }
 
     @keyframes shine {
-      0% { background-position: 0% center; }
-      100% { background-position: -200% center; }
+      0% {
+        background-position: 0% center;
+      }
+      100% {
+        background-position: -200% center;
+      }
     }
 
     .grid {
@@ -80,13 +84,14 @@
     }
 
     .movies-button {
-      grid-column: span 2;
+      display: flex;
+      width: 100%;
+      max-width: 600px;
+      gap: 1rem;
     }
 
-    @media (max-width: 480px) {
-      .movies-button {
-        grid-column: span 1;
-      }
+    .movies-button a {
+      flex: 1;
     }
   </style>
 </head>
@@ -111,8 +116,10 @@
     <a href="https://archive.org/details/DM_S18_MAK" onclick="ripple(event)">DM_S18</a>
     <a href="https://archive.org/details/DM_S19_MAK" onclick="ripple(event)">DM_S19</a>
     <a href="https://archive.org/details/DM_S20_MAK" onclick="ripple(event)">DM_S20</a>
-    <a href="https://archive.org/details/DM_MOVIES_MAK" onclick="ripple(event)" class="movies-button">MOVIES-1</a>
-    <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" onclick="ripple(event)" class="movies-button">MOVIES-2</a>
+  </div>
+  <div class="movies-button">
+    <a href="https://archive.org/details/DM_MOVIES_MAK" onclick="ripple(event)">MOVIES-1</a>
+    <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" onclick="ripple(event)">MOVIES-2</a>
   </div>
 
   <script>
