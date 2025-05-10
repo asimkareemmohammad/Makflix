@@ -43,7 +43,28 @@
       text-align: center;
       border-radius: 8px;
       text-decoration: none;
+      position: relative;
+      overflow: hidden; /* keeps the ripple inside */
       transition: transform 0.2s ease, background-color 0.3s;
+    }
+
+    a::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(0, 240, 255, 0.25);
+      border-radius: 8px; /* match box corners */
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease;
+      z-index: 0;
+    }
+
+    a:active::after {
+      width: 200%;
+      height: 200%;
     }
 
     a:active {
