@@ -162,22 +162,23 @@
       setTimeout(() => ripple.remove(), 600);
     }
 
-    // Heart drop generator with more frequency
+    const icons = ['♡', '✧'];
+
     setInterval(() => {
-      const heart = document.createElement('div');
-      heart.className = 'particle';
-      heart.textContent = '♡';
-      heart.style.left = Math.random() * window.innerWidth + 'px';
+      const drop = document.createElement('div');
+      drop.className = 'particle';
+      drop.textContent = icons[Math.floor(Math.random() * icons.length)];
+      drop.style.left = Math.random() * window.innerWidth + 'px';
 
       const size = Math.floor(Math.random() * 10) + 14;
       const duration = Math.random() * 4000 + 8000;
-      heart.style.fontSize = size + 'px';
+      drop.style.fontSize = size + 'px';
 
       const angle = Math.random() > 0.5 ? 1 : -1;
       const spin = angle * (Math.random() * 360 + 90);
-      heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+      drop.style.transform = `rotate(${Math.random() * 360}deg)`;
 
-      heart.animate([
+      drop.animate([
         { transform: `translate(0, 0) rotate(0deg)` },
         { transform: `translate(${angle * 20}px, 110vh) rotate(${spin}deg)`, opacity: 0 }
       ], {
@@ -185,9 +186,9 @@
         iterations: 1
       });
 
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), duration);
-    }, 300); // faster frequency
+      document.body.appendChild(drop);
+      setTimeout(() => drop.remove(), duration);
+    }, 300);
   </script>
 </body>
 </html>
