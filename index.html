@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="makflix-logo.avif" type="image/avif">
-<link rel="apple-touch-icon" href="makflix-logo.avif">
-<meta name="theme-color" content="#000000">
-  
+
+  <!-- Favicons (desktop/tab) -->
+  <link rel="icon" href="icons/makflix-192.png" type="image/png" sizes="192x192">
+  <link rel="icon" href="icons/makflix-256.png" type="image/png" sizes="256x256">
+
+  <!-- iOS app icon -->
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png" sizes="180x180">
+
+  <meta name="theme-color" content="#000000">
+
+  <!-- Better PWA behavior -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Makflix">
+  <meta name="mobile-web-app-capable" content="yes">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Makflix - Doraemon Seasons</title>
@@ -193,7 +204,7 @@
 
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), duration);
-    }, 300); // faster frequency
+    }, 300);
   </script>
 </body>
 </html>
