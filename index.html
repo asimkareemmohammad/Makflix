@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Makflix - Doraemon Seasons</title>
+
+  <!-- Manifest -->
   <link rel="manifest" href="manifest.json">
 
-  <!-- Favicons (desktop/tab) -->
-  <link rel="icon" href="icons/makflix-192.png" type="image/png" sizes="192x192">
-  <link rel="icon" href="icons/makflix-256.png" type="image/png" sizes="256x256">
+  <!-- Favicons (for desktop browsers / tabs) -->
+  <link rel="icon" href="icons/makflix-logo 96.png" type="image/png" sizes="96x96">
+  <link rel="icon" href="icons/makflix-logo 128.png" type="image/png" sizes="128x128">
 
-  <!-- iOS app icon -->
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png" sizes="180x180">
+  <!-- iOS app icons -->
+  <link rel="apple-touch-icon" href="icons/makflix-logo 180.png" sizes="180x180">
+  <link rel="apple-touch-icon" href="icons/makflix-logo 192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/makflix-logo 256.png" sizes="256x256">
+  <link rel="apple-touch-icon" href="icons/makflix-logo 512.png" sizes="512x512">
 
+  <!-- PWA Theme -->
   <meta name="theme-color" content="#000000">
-
-  <!-- Better PWA behavior -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Makflix">
   <meta name="mobile-web-app-capable" content="yes">
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Makflix - Doraemon Seasons</title>
   <style>
     body {
       margin: 0;
@@ -179,7 +183,7 @@
       setTimeout(() => ripple.remove(), 600);
     }
 
-    // Heart drop generator with more frequency
+    // Heart drop generator
     setInterval(() => {
       const heart = document.createElement('div');
       heart.className = 'particle';
