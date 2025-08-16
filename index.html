@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Makflix - Doraemon Seasons</title>
 
-  <!-- Manifest -->
   <link rel="manifest" href="manifest.json">
 
   <!-- Favicons (desktop/tab) -->
@@ -46,10 +45,7 @@
       -webkit-text-fill-color: transparent;
       animation: shine 3s linear infinite;
     }
-    @keyframes shine {
-      0% { background-position: 0% center; }
-      100% { background-position: -200% center; }
-    }
+    @keyframes shine { 0% {background-position:0% center;} 100% {background-position:-200% center;} }
 
     .grid {
       display: grid;
@@ -117,7 +113,7 @@
     }
     @keyframes float { to { transform: translateY(110vh); opacity: 0; } }
 
-    /* ---- Tiny boot overlay to smooth the built-in splash handoff ---- */
+    /* ==== Boot overlay (added min display) ==== */
     #boot {
       position: fixed;
       inset: 0;
@@ -126,15 +122,15 @@
       place-items: center;
       z-index: 9999;
       opacity: 1;
-      transition: opacity 220ms ease;
+      transition: opacity 380ms ease; /* a bit slower */
     }
     #boot.hide { opacity: 0; pointer-events: none; }
-    #boot img { width: 96px; height: 96px; }
+    #boot img { width: 112px; height: 112px; } /* small tasteful logo */
     @media (prefers-reduced-motion: reduce) { #boot { transition: none; } }
   </style>
 </head>
 <body>
-  <!-- Boot overlay (uses your 192.png). Fades out after first paint -->
+  <!-- Boot overlay -->
   <div id="boot"><img src="icons/192.png" alt="Makflix"></div>
 
   <h1 class="heading">DM All<br />Seasons & Movies</h1>
@@ -186,21 +182,31 @@
       const angle = Math.random() > 0.5 ? 1 : -1;
       const spin = angle * (Math.random() * 360 + 90);
       heart.style.transform = `rotate(${Math.random() * 360}deg)`;
-      heart.animate([
-        { transform: `translate(0, 0) rotate(0deg)` },
-        { transform: `translate(${angle * 20}px, 110vh) rotate(${spin}deg)`, opacity: 0 }
-      ], { duration, iterations: 1 });
+      heart.animate(
+        [{ transform: `translate(0, 0) rotate(0deg)` },
+         { transform: `translate(${angle * 20}px, 110vh) rotate(${spin}deg)`, opacity: 0 }],
+        { duration, iterations: 1 }
+      );
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), duration);
     }, 300);
 
-    // Fade out boot overlay after first paint
+    // ===== Smooth boot overlay with minimum show time =====
+    const bootStart = performance.now();
     window.addEventListener('load', () => {
-      requestAnimationFrame(() => {
-        const b = document.getElementById('boot');
-        if (b) b.classList.add('hide');
-        setTimeout(() => b && b.remove(), 260);
-      });
+      const MIN_SHOW = 900; // ms – adjust to taste (e.g., 1100)
+      const elapsed = performance.now() - bootStart;
+      const wait = Math.max(0, MIN_SHOW - elapsed);
+
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          const b = document.getElementById('boot');
+          if (b) {
+            b.classList.add('hide');
+            setTimeout(() => b.remove(), 420); // matches CSS transition
+          }
+        });
+      }, wait);
     });
   </script>
 </body>
