@@ -112,9 +112,27 @@
       animation: float 10s linear forwards, shine 2s infinite linear;
     }
     @keyframes float { to { transform: translateY(110vh); opacity: 0; } }
+
+    /* ==== Boot overlay (bigger icon + smooth fade) ==== */
+    #boot {
+      position: fixed;
+      inset: 0;
+      background: #0f0f0f;
+      display: grid;
+      place-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 420ms ease;
+    }
+    #boot.hide { opacity: 0; pointer-events: none; }
+    #boot img { width: 240px; height: 240px; } /* <-- make bigger/smaller here */
+    @media (prefers-reduced-motion: reduce) { #boot { transition: none; } }
   </style>
 </head>
 <body>
+  <!-- Boot overlay -->
+  <div id="boot"><img src="icons/192.png" alt="Makflix"></div>
+
   <h1 class="heading">DM All<br />Seasons & Movies</h1>
   <div class="grid">
     <a href="https://archive.org/details/dm-s1-mak" onclick="ripple(event)"><span class="label">DM_S1</span></a>
@@ -172,6 +190,22 @@
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), duration);
     }, 300);
+
+    // ===== Smooth boot overlay with minimum show time =====
+    const bootStart = performance.now();
+    window.addEventListener('load', () => {
+      const MIN_SHOW = 2000; // ms — increase/decrease to taste
+      const elapsed = performance.now() - bootStart;
+      const wait = Math.max(0, MIN_SHOW - elapsed);
+
+      setTimeout(() => {
+        const b = document.getElementById('boot');
+        if (b) {
+          b.classList.add('hide');
+          setTimeout(() => b.remove(), 450); // matches CSS transition
+        }
+      }, wait);
+    });
   </script>
 </body>
 </html>
