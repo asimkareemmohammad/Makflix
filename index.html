@@ -19,24 +19,41 @@
   <meta name="mobile-web-app-capable" content="yes">
 
   <style>
+    :root{
+      /* tweak these two to taste */
+      --boot-min-show: 3500ms; /* how long the overlay stays (at least) */
+      --boot-fade: 1200ms;     /* how slowly the overlay fades out */
+      --app-fade: 700ms;       /* how your page fades/scales in */
+      --app-fade-delay: 150ms; /* delay before the page starts animating */
+    }
+
+    /* Page base */
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #0f0f0f;
       color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
       min-height: 100vh;
-      padding: 2rem;
-      text-align: center;
-      overflow: hidden;
+      overflow: hidden; /* avoid scroll flicker during boot */
+    }
+
+    /* Wrap the real UI so we can animate it in */
+    #app {
+      opacity: 0;
+      transform: scale(0.985);
+      transition:
+        opacity var(--app-fade) ease var(--app-fade-delay),
+        transform var(--app-fade) ease var(--app-fade-delay);
+    }
+    .boot-done #app {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .heading {
       font-size: 2rem;
-      margin-bottom: 2rem;
+      margin: 2rem auto;
+      text-align: center;
       line-height: 1.4;
       width: 100%;
       background: linear-gradient(90deg, #facc15, #00f0ff, #facc15);
@@ -53,6 +70,9 @@
       gap: 1rem;
       width: 100%;
       max-width: 600px;
+      padding: 0 2rem 2rem;
+      box-sizing: border-box;
+      margin: 0 auto;
     }
 
     a {
@@ -66,6 +86,7 @@
       overflow: hidden;
       transition: transform 0.2s ease, background-color 0.3s;
       -webkit-tap-highlight-color: transparent;
+      color: inherit;
     }
 
     a span.label {
@@ -113,51 +134,56 @@
     }
     @keyframes float { to { transform: translateY(110vh); opacity: 0; } }
 
-    /* ==== Boot overlay (bigger icon + smoother fade) ==== */
+    /* ==== Boot overlay (NO image — lets Android circle be the only logo) ==== */
     #boot {
       position: fixed;
       inset: 0;
-      background: #0f0f0f;
-      display: grid;
-      place-items: center;
+      background: #0f0f0f;     /* matches theme_color */
       z-index: 9999;
       opacity: 1;
-      transition: opacity 1200ms ease; /* slower fade */
+      transition: opacity var(--boot-fade) ease;
     }
     #boot.hide { opacity: 0; pointer-events: none; }
-    #boot img { width: 280px; height: 280px; } /* logo size here */
-    @media (prefers-reduced-motion: reduce) { #boot { transition: none; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      #boot { transition: none; }
+      #app { transition: none; }
+    }
   </style>
 </head>
 <body>
-  <!-- Boot overlay -->
-  <div id="boot"><img src="icons/192.png" alt="Makflix"></div>
+  <!-- Boot overlay (blank) -->
+  <div id="boot"></div>
 
-  <h1 class="heading">DM All<br />Seasons & Movies</h1>
-  <div class="grid">
-    <a href="https://archive.org/details/dm-s1-mak" onclick="ripple(event)"><span class="label">DM_S1</span></a>
-    <a href="https://archive.org/details/doraemon-s2-mak" onclick="ripple(event)"><span class="label">DM_S2</span></a>
-    <a href="https://archive.org/details/DM-S3-MAK" onclick="ripple(event)"><span class="label">DM_S3</span></a>
-    <a href="https://archive.org/details/DM-S4-MAK" onclick="ripple(event)"><span class="label">DM_S4</span></a>
-    <a href="https://archive.org/details/DM-S5-MAK" onclick="ripple(event)"><span class="label">DM_S5</span></a>
-    <a href="https://archive.org/details/DM-S6-MAK2" onclick="ripple(event)"><span class="label">DM_S6</span></a>
-    <a href="https://archive.org/details/DM-S7-MAK" onclick="ripple(event)"><span class="label">DM_S7</span></a>
-    <a href="https://archive.org/details/DM-S8-MAK" onclick="ripple(event)"><span class="label">DM_S8</span></a>
-    <a href="https://archive.org/details/DM-S12-MAK" onclick="ripple(event)"><span class="label">DM_S12</span></a>
-    <a href="https://archive.org/details/DM_S14_MAK" onclick="ripple(event)"><span class="label">DM_S14</span></a>
-    <a href="https://archive.org/details/DM_S15_MAK" onclick="ripple(event)"><span class="label">DM_S15</span></a>
-    <a href="https://archive.org/details/DM_S16_MAK" onclick="ripple(event)"><span class="label">DM_S16</span></a>
-    <a href="https://archive.org/details/DM_S17_MAK" onclick="ripple(event)"><span class="label">DM_S17</span></a>
-    <a href="https://archive.org/details/DM_S18_MAK" onclick="ripple(event)"><span class="label">DM_S18</span></a>
-    <a href="https://archive.org/details/DM_S19_MAK" onclick="ripple(event)"><span class="label">DM_S19</span></a>
-    <a href="https://archive.org/details/DM_S20_MAK" onclick="ripple(event)"><span class="label">DM_S20</span></a>
-    <div class="movies-row">
-      <a href="https://archive.org/details/DM_MOVIES_MAK" onclick="ripple(event)"><span class="label">MOVIES-1</span></a>
-      <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" onclick="ripple(event)"><span class="label">MOVIES-2</span></a>
+  <!-- Real UI -->
+  <main id="app">
+    <h1 class="heading">DM All<br />Seasons & Movies</h1>
+    <div class="grid">
+      <a href="https://archive.org/details/dm-s1-mak" onclick="ripple(event)"><span class="label">DM_S1</span></a>
+      <a href="https://archive.org/details/doraemon-s2-mak" onclick="ripple(event)"><span class="label">DM_S2</span></a>
+      <a href="https://archive.org/details/DM-S3-MAK" onclick="ripple(event)"><span class="label">DM_S3</span></a>
+      <a href="https://archive.org/details/DM-S4-MAK" onclick="ripple(event)"><span class="label">DM_S4</span></a>
+      <a href="https://archive.org/details/DM-S5-MAK" onclick="ripple(event)"><span class="label">DM_S5</span></a>
+      <a href="https://archive.org/details/DM-S6-MAK2" onclick="ripple(event)"><span class="label">DM_S6</span></a>
+      <a href="https://archive.org/details/DM-S7-MAK" onclick="ripple(event)"><span class="label">DM_S7</span></a>
+      <a href="https://archive.org/details/DM-S8-MAK" onclick="ripple(event)"><span class="label">DM_S8</span></a>
+      <a href="https://archive.org/details/DM-S12-MAK" onclick="ripple(event)"><span class="label">DM_S12</span></a>
+      <a href="https://archive.org/details/DM_S14_MAK" onclick="ripple(event)"><span class="label">DM_S14</span></a>
+      <a href="https://archive.org/details/DM_S15_MAK" onclick="ripple(event)"><span class="label">DM_S15</span></a>
+      <a href="https://archive.org/details/DM_S16_MAK" onclick="ripple(event)"><span class="label">DM_S16</span></a>
+      <a href="https://archive.org/details/DM_S17_MAK" onclick="ripple(event)"><span class="label">DM_S17</span></a>
+      <a href="https://archive.org/details/DM_S18_MAK" onclick="ripple(event)"><span class="label">DM_S18</span></a>
+      <a href="https://archive.org/details/DM_S19_MAK" onclick="ripple(event)"><span class="label">DM_S19</span></a>
+      <a href="https://archive.org/details/DM_S20_MAK" onclick="ripple(event)"><span class="label">DM_S20</span></a>
+      <div class="movies-row">
+        <a href="https://archive.org/details/DM_MOVIES_MAK" onclick="ripple(event)"><span class="label">MOVIES-1</span></a>
+        <a href="https://archive.org/details/DM_MOVIES_PT2_MAK" onclick="ripple(event)"><span class="label">MOVIES-2</span></a>
+      </div>
     </div>
-  </div>
+  </main>
 
   <script>
+    // Button ripple
     function ripple(e) {
       if (navigator.vibrate) navigator.vibrate(30);
       const target = e.currentTarget;
@@ -170,39 +196,23 @@
       setTimeout(() => ripple.remove(), 600);
     }
 
-    // Heart drop generator
-    setInterval(() => {
-      const heart = document.createElement('div');
-      heart.className = 'particle';
-      heart.textContent = '♡';
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      const size = Math.floor(Math.random() * 10) + 14;
-      const duration = Math.random() * 4000 + 8000;
-      heart.style.fontSize = size + 'px';
-      const angle = Math.random() > 0.5 ? 1 : -1;
-      const spin = angle * (Math.random() * 360 + 90);
-      heart.style.transform = `rotate(${Math.random() * 360}deg)`;
-      heart.animate(
-        [{ transform: `translate(0, 0) rotate(0deg)` },
-         { transform: `translate(${angle * 20}px, 110vh) rotate(${spin}deg)`, opacity: 0 }],
-        { duration, iterations: 1 }
-      );
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), duration);
-    }, 300);
-
-    // ===== Smooth boot overlay with minimum show time =====
+    // Smooth boot overlay with minimum show time
     const bootStart = performance.now();
     window.addEventListener('load', () => {
-      const MIN_SHOW = 3500; // ms — adjust for longer/shorter hold
+      const MIN_SHOW = parseFloat(getComputedStyle(document.documentElement)
+                         .getPropertyValue('--boot-min-show')) || 3500;
+
       const elapsed = performance.now() - bootStart;
       const wait = Math.max(0, MIN_SHOW - elapsed);
 
       setTimeout(() => {
         const b = document.getElementById('boot');
         if (b) {
-          b.classList.add('hide');
-          setTimeout(() => b.remove(), 1200); // match CSS transition (1200ms)
+          b.classList.add('hide');          // fade black sheet
+          document.body.classList.add('boot-done'); // let #app fade/scale in
+          // remove the sheet after its fade
+          const bootFade = parseFloat(getComputedStyle(b).transitionDuration) * 1000 || 1200;
+          setTimeout(() => b.remove(), bootFade + 50);
         }
       }, wait);
     });
